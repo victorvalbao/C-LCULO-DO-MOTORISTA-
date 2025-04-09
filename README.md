@@ -2,47 +2,117 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Custo por KM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de KM</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 500px;
-      margin: auto;
+      background-color: #121212;
+      color: #FFFFFF;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
       padding: 20px;
+      max-width: 480px;
+      margin: auto;
     }
-    label, input {
+
+    h2 {
+      text-align: center;
+      color: #00E676;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
       display: block;
-      margin: 10px 0;
     }
-    button {
-      margin: 5px 0;
-      padding: 10px;
+
+    input {
       width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1e1e1e;
+      color: white;
       font-size: 16px;
     }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #00E676;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00c867;
+    }
+
+    .secao {
+      margin-bottom: 40px;
+    }
+
     .resultados, .estimativa {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .botao-opcao {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .botao-opcao:hover {
+      background-color: #555;
+    }
+
+    #resultadoFinal {
       margin-top: 20px;
+      font-size: 18px;
+      color: #00E676;
+      text-align: center;
+    }
+
+    #estimativaResultado {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <h2>Calculadora de Valor por KM</h2>
 
-  <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
-  <input type="number" id="precoCombustivel" step="0.01" required>
+  <h2>Calculadora de KM</h2>
 
-  <label for="consumo">Consumo do Carro (km por litro):</label>
-  <input type="number" id="consumo" step="0.1" required>
+  <div class="secao">
+    <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
+    <input type="number" id="precoCombustivel" step="0.01">
 
-  <button onclick="calcular()">Calcular Valor do KM</button>
+    <label for="consumo">Consumo do Carro (km/litro):</label>
+    <input type="number" id="consumo" step="0.1">
+
+    <button onclick="calcular()">Calcular Valor do KM</button>
+  </div>
 
   <div class="resultados" id="resultados" style="display:none;">
     <p><strong>Custo por km:</strong> R$ <span id="valorKm">0.00</span></p>
-    <h3>Aceitar Corridas</h3>
-    <button onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
-    <button onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
-    <button onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
+
+    <h3 style="margin-top: 20px;">Aceitar Corridas</h3>
+    <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
+    <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
+    <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
     <button onclick="mostrarResultado('ideal')">Mostrar Melhor Opção</button>
+
     <h3 id="resultadoFinal"></h3>
   </div>
 
