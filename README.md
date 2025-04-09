@@ -11,8 +11,16 @@
       color: #333;
       margin: 0;
       padding: 20px;
+    }
+
+    .container {
       max-width: 480px;
       margin: auto;
+      padding: 20px;
+      border: 3px solid black; /* Aqui está a borda preta */
+      border-radius: 15px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h2 {
@@ -131,33 +139,35 @@
 </head>
 <body>
 
-  <h2>Melhorando os Ganhos</h2>
+  <div class="container">
+    <h2>Melhorando os Ganhos</h2>
 
-  <div class="secao">
-    <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
-    <input type="number" id="precoCombustivel" step="0.01">
+    <div class="secao">
+      <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
+      <input type="number" id="precoCombustivel" step="0.01">
 
-    <label for="consumo">Consumo do Carro (km/litro):</label>
-    <input type="number" id="consumo" step="0.1">
+      <label for="consumo">Consumo do Carro (km/litro):</label>
+      <input type="number" id="consumo" step="0.1">
 
-    <button onclick="calcular()">Calcular Valor do KM</button>
-  </div>
+      <button onclick="calcular()">Calcular Valor do KM</button>
+    </div>
 
-  <div class="resultados" id="resultados" style="display:none;">
-    <p><strong>Custo por km:</strong> <span id="valorKm">R$ 0.00</span></p>
+    <div class="resultados" id="resultados" style="display:none;">
+      <p><strong>Custo por km:</strong> <span id="valorKm">R$ 0.00</span></p>
 
-    <h3 style="margin-top: 20px;">Aceitar Corridas</h3>
-    <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
-    <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
-    <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
-  </div>
+      <h3 style="margin-top: 20px;">Aceitar Corridas</h3>
+      <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
+      <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
+      <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
+    </div>
 
-  <div class="estimativa">
-    <h3>Cálculo de uma Corrida Particular</h3>
-    <label for="distancia">Distância da Corrida (km):</label>
-    <input type="number" id="distancia" step="0.1">
-    <button onclick="estimarCorrida()">Estimar Corrida</button>
-    <p id="estimativaResultado"></p>
+    <div class="estimativa">
+      <h3>Cálculo de uma Corrida Particular</h3>
+      <label for="distancia">Distância da Corrida (km):</label>
+      <input type="number" id="distancia" step="0.1">
+      <button onclick="estimarCorrida()">Estimar Corrida</button>
+      <p id="estimativaResultado"></p>
+    </div>
   </div>
 
   <!-- Popup -->
