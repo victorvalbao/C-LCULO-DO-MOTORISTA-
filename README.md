@@ -72,7 +72,7 @@
     <label for="km">Quilômetros rodados:</label>
     <input type="number" id="km" placeholder="Ex: 100">
 
-    <label for="gasto">Gasto com Combustivel (R$):</label>
+    <label for="gasto"> Gasto com Combustivel (R$):</label>
     <input type="number" id="gasto" placeholder="Ex: 50">
 
     <button onclick="calcular()">Calcular</button>
