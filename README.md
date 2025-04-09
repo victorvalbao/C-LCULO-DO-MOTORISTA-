@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de KM</title>
+  <title>Motorista Pro KM</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#121212">
   <style>
     body {
       background-color: #121212;
@@ -29,7 +31,7 @@
 
     input {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       margin-bottom: 20px;
       border: none;
       border-radius: 8px;
@@ -92,7 +94,7 @@
 </head>
 <body>
 
-  <h2>Calculadora de KM</h2>
+  <h2>Motorista Pro KM</h2>
 
   <div class="secao">
     <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
