@@ -14,12 +14,6 @@
       text-align: center;
     }
 
-    h1 {
-      color: #007bff;
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
-
     .container {
       max-width: 500px;
       margin: auto;
@@ -32,9 +26,10 @@
 
     h2 {
       margin-top: 0;
-      color: #2e8b57;
-      font-size: 24px;
+      color: #007bff;
+      font-size: 26px;
       font-weight: bold;
+      text-align: center;
     }
 
     label {
@@ -125,10 +120,8 @@
 </head>
 <body>
 
-  <h1>CALCULO-DO-MOTORISTA</h1>
-
   <div class="container">
-    <h2>Melhorando os Ganhos</h2>
+    <h2>CALCULO-DO-MOTORISTA</h2>
 
     <label for="precoCombustivel">Preço do combustível (R$/litro):</label>
     <input type="number" id="precoCombustivel" step="0.01" />
@@ -148,7 +141,7 @@
     </div>
 
     <div class="estimativa">
-      <h3>Cálculo de uma Corrida Particular</h3>
+      <h3>Calcular Corrida Particular</h3>
       <label for="distancia">Distância da Corrida (km):</label>
       <input type="number" id="distancia" step="0.1" />
       <button onclick="estimarCorrida()">Calcular Corrida Particular</button>
