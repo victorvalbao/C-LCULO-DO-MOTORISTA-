@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Motorista Pro KM</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#121212">
   <style>
     body {
-      background-color: #121212;
-      color: #FFFFFF;
+      background-color: #f9f9f9;
+      color: #333;
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
@@ -19,7 +17,7 @@
 
     h2 {
       text-align: center;
-      color: #00E676;
+      color: #2E7D32;
       margin-bottom: 30px;
     }
 
@@ -33,10 +31,10 @@
       width: 100%;
       padding: 14px;
       margin-bottom: 20px;
-      border: none;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      background-color: #1e1e1e;
-      color: white;
+      background-color: #fff;
+      color: #333;
       font-size: 16px;
     }
 
@@ -46,8 +44,8 @@
       margin-bottom: 12px;
       border: none;
       border-radius: 8px;
-      background-color: #00E676;
-      color: #000;
+      background-color: #2E7D32;
+      color: #fff;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
@@ -55,7 +53,7 @@
     }
 
     button:hover {
-      background-color: #00c867;
+      background-color: #1b5e20;
     }
 
     .secao {
@@ -63,32 +61,64 @@
     }
 
     .resultados, .estimativa {
-      background-color: #1e1e1e;
+      background-color: #ffffff;
       padding: 20px;
       border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
     .botao-opcao {
-      background-color: #333;
-      color: #fff;
+      background-color: #E0E0E0;
+      color: #333;
     }
 
     .botao-opcao:hover {
-      background-color: #555;
-    }
-
-    #resultadoFinal {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #00E676;
-      text-align: center;
+      background-color: #ccc;
     }
 
     #estimativaResultado {
       margin-top: 10px;
       text-align: center;
       font-size: 14px;
-      color: #ccc;
+      color: #555;
+    }
+
+    /* Estilos da janela flutuante */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .popup {
+      background: #fff;
+      color: #333;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 300px;
+      width: 90%;
+    }
+
+    .popup h3 {
+      margin: 0 0 10px;
+      color: #2E7D32;
+    }
+
+    .popup button {
+      background-color: #2E7D32;
+      color: white;
+      width: auto;
+      margin-top: 15px;
+      padding: 10px 20px;
     }
   </style>
 </head>
@@ -114,8 +144,6 @@
     <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
     <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
     <button onclick="mostrarResultado('ideal')">Mostrar Melhor Opção</button>
-
-    <h3 id="resultadoFinal"></h3>
   </div>
 
   <div class="estimativa">
@@ -124,6 +152,15 @@
     <input type="number" id="distancia" step="0.1">
     <button onclick="estimarCorrida()">Estimar Corrida</button>
     <p id="estimativaResultado"></p>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <h3 id="popupTitulo">Resultado</h3>
+      <p id="popupTexto"></p>
+      <button onclick="fecharPopup()">Fechar</button>
+    </div>
   </div>
 
   <script>
@@ -137,7 +174,6 @@
         valorKmBase = preco / consumo;
         document.getElementById('valorKm').innerText = valorKmBase.toFixed(2);
         document.getElementById('resultados').style.display = 'block';
-        document.getElementById('resultadoFinal').innerText = '';
       } else {
         alert('Preencha os campos corretamente.');
       }
@@ -153,13 +189,19 @@
       let titulo = '';
 
       switch (tipo) {
-        case 'minimo': multiplicador = 3; titulo = 'Valor KMmínimo'; break;
-        case 'medio': multiplicador = 3.5; titulo = 'Valor KMmédio'; break;
-        case 'ideal': multiplicador = 4; titulo = 'Valor KMideal'; break;
+        case 'minimo': multiplicador = 3; titulo = 'KMmínimo'; break;
+        case 'medio': multiplicador = 3.5; titulo = 'KMmédio'; break;
+        case 'ideal': multiplicador = 4; titulo = 'KMideal'; break;
       }
 
       const valorFinal = valorKmBase * multiplicador;
-      document.getElementById('resultadoFinal').innerText = `${titulo}: R$ ${valorFinal.toFixed(2)}`;
+      document.getElementById('popupTitulo').innerText = titulo;
+      document.getElementById('popupTexto').innerText = `R$ ${valorFinal.toFixed(2)}`;
+      document.getElementById('popupOverlay').style.display = 'flex';
+    }
+
+    function fecharPopup() {
+      document.getElementById('popupOverlay').style.display = 'none';
     }
 
     function estimarCorrida() {
