@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -144,7 +145,6 @@
     <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
     <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
     <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
-    <button onclick="mostrarResultado('ideal')">Calcular Valor do KM e Mostrar Melhor Opção</button>
   </div>
 
   <div class="estimativa">
