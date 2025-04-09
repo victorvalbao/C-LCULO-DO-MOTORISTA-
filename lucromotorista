@@ -1,99 +1,95 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calcula KM</title>
+  <meta charset="UTF-8">
+  <title>Calculadora de Valor por KM</title>
   <style>
     body {
-      background: #f5f5f5;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
+      margin: 30px;
     }
-
-    .container {
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 100%;
-    }
-
-    h2 {
-      text-align: center;
-      color: #2c3e50;
-    }
-
     label {
       display: block;
-      margin-top: 15px;
-      color: #555;
+      margin-top: 10px;
     }
-
     input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 5px;
+      width: 200px;
     }
-
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background-color: #2980b9;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #1c5980;
-    }
-
     .resultado {
       margin-top: 20px;
-      text-align: center;
-      color: #27ae60;
-      font-size: 18px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Calcula KM</h2>
-    <label for="km">Quilômetros rodados:</label>
-    <input type="number" id="km" placeholder="Ex: 100">
 
-    <label for="gasto">Gasto com Combustivel (R$):</label>
-    <input type="number" id="gasto" placeholder="Ex: 50">
+  <h2>Calculadora de Valor por KM</h2>
 
-    <button onclick="calcular()">Calcular</button>
+  <label>Valor do combustível (R$):</label>
+  <input type="number" id="valorCombustivel" step="0.01">
 
-    <div class="resultado" id="resultado"></div>
+  <label>KM por litro:</label>
+  <input type="number" id="kmPorLitro" step="0.1">
+
+  <label>KM rodado:</label>
+  <input type="number" id="kmRodado">
+
+  <label>Gasto com combustível (pode editar):</label>
+  <input type="number" id="gastoCombustivel" step="0.01">
+
+  <div class="resultado">
+    Valor por KM: R$ <span id="valorKm">0.00</span>
   </div>
 
   <script>
-    function calcular() {
-      const km = parseFloat(document.getElementById("km").value);
-      const gasto = parseFloat(document.getElementById("gasto").value);
+    const valorCombustivel = document.getElementById("valorCombustivel");
+    const kmPorLitro = document.getElementById("kmPorLitro");
+    const kmRodado = document.getElementById("kmRodado");
+    const gastoCombustivel = document.getElementById("gastoCombustivel");
+    const valorKm = document.getElementById("valorKm");
 
-      if (isNaN(km) || isNaN(gasto) || km === 0) {
-        document.getElementById("resultado").innerText = "Preencha os campos corretamente.";
-        return;
+    function atualizarResultados() {
+      const vComb = parseFloat(valorCombustivel.value);
+      const kmLitro = parseFloat(kmPorLitro.value);
+      const km = parseFloat(kmRodado.value);
+      let gasto = parseFloat(gastoCombustivel.value);
+
+      if (!isNaN(vComb) && !isNaN(kmLitro) && !isNaN(km)) {
+        const gastoCalculado = (km / kmLitro) * vComb;
+        if (!gastoCombustivel.dataset.manual) {
+          gasto = gastoCalculado;
+          gastoCombustivel.value = gasto.toFixed(2);
+        }
       }
 
-      const valorPorKm = gasto / km;
-      document.getElementById("resultado").innerText = `Valor por KM: R$ ${valorPorKm.toFixed(2)}`;
+      if (!isNaN(gasto) && !isNaN(km) && km > 0) {
+        const valorPorKm = gasto / km;
+        valorKm.textContent = valorPorKm.toFixed(2);
+      }
     }
+
+    // Eventos
+    valorCombustivel.addEventListener("input", () => {
+      gastoCombustivel.dataset.manual = "";
+      atualizarResultados();
+    });
+
+    kmPorLitro.addEventListener("input", () => {
+      gastoCombustivel.dataset.manual = "";
+      atualizarResultados();
+    });
+
+    kmRodado.addEventListener("input", () => {
+      gastoCombustivel.dataset.manual = "";
+      atualizarResultados();
+    });
+
+    gastoCombustivel.addEventListener("input", () => {
+      gastoCombustivel.dataset.manual = "true";
+      atualizarResultados();
+    });
   </script>
+
 </body>
 </html>
