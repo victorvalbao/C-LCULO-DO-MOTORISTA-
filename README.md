@@ -1,14 +1,13 @@
-
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motorista Pro KM</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Melhorando os Ganhos</title>
   <style>
     body {
-      background-color: #f9f9f9;
-      color: #333;
+      background-color: #f7f7f7;
       font-family: 'Segoe UI', sans-serif;
+      color: #333;
       margin: 0;
       padding: 20px;
       max-width: 480px;
@@ -17,7 +16,7 @@
 
     h2 {
       text-align: center;
-      color: #2E7D32;
+      color: #32c766;
       margin-bottom: 30px;
     }
 
@@ -31,10 +30,9 @@
       width: 100%;
       padding: 14px;
       margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
       background-color: #fff;
-      color: #333;
       font-size: 16px;
     }
 
@@ -43,8 +41,8 @@
       padding: 14px;
       margin-bottom: 12px;
       border: none;
-      border-radius: 8px;
-      background-color: #2E7D32;
+      border-radius: 10px;
+      background-color: #32c766;
       color: #fff;
       font-size: 16px;
       font-weight: bold;
@@ -53,7 +51,16 @@
     }
 
     button:hover {
-      background-color: #1b5e20;
+      background-color: #28b159;
+    }
+
+    .botao-opcao {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+
+    .botao-opcao:hover {
+      background-color: #ccc;
     }
 
     .secao {
@@ -61,19 +68,14 @@
     }
 
     .resultados, .estimativa {
-      background-color: #ffffff;
+      background-color: #fff;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
-    .botao-opcao {
-      background-color: #E0E0E0;
-      color: #333;
-    }
-
-    .botao-opcao:hover {
-      background-color: #ccc;
+    .estimativa h3 {
+      margin-top: 0;
     }
 
     #estimativaResultado {
@@ -83,7 +85,6 @@
       color: #555;
     }
 
-    /* Estilos da janela flutuante */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -110,11 +111,11 @@
 
     .popup h3 {
       margin: 0 0 10px;
-      color: #2E7D32;
+      color: #32c766;
     }
 
     .popup button {
-      background-color: #2E7D32;
+      background-color: #32c766;
       color: white;
       width: auto;
       margin-top: 15px;
@@ -124,7 +125,7 @@
 </head>
 <body>
 
-  <h2>Motorista Pro KM</h2>
+  <h2>Melhorando os Ganhos</h2>
 
   <div class="secao">
     <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
@@ -143,7 +144,7 @@
     <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
     <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
     <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
-    <button onclick="mostrarResultado('ideal')">Mostrar Melhor Opção</button>
+    <button onclick="mostrarResultado('ideal')">Calcular Valor do KM e Mostrar Melhor Opção</button>
   </div>
 
   <div class="estimativa">
