@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -144,7 +144,7 @@
   </div>
 
   <div class="resultados" id="resultados" style="display:none;">
-    <p><strong>Custo por km:</strong> R$ <span id="valorKm">0.00</span></p>
+    <p><strong>Custo por km:</strong> <span id="valorKm">R$ 0.00</span></p>
 
     <h3 style="margin-top: 20px;">Aceitar Corridas</h3>
     <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
@@ -178,7 +178,7 @@
 
       if (!isNaN(preco) && preco > 0 && !isNaN(consumo) && consumo > 0) {
         valorKmBase = preco / consumo;
-        document.getElementById('valorKm').innerText = valorKmBase.toFixed(2);
+        document.getElementById('valorKm').innerText = `R$ ${valorKmBase.toFixed(2)}`;
         document.getElementById('resultados').style.display = 'block';
       } else {
         alert('Preencha os campos corretamente.');
@@ -186,4 +186,44 @@
     }
 
     function mostrarResultado(tipo) {
-      if (valorKmBase
+      if (valorKmBase === 0) {
+        alert('Você precisa calcular o valor por KM primeiro.');
+        return;
+      }
+
+      let multiplicador = 0;
+      let titulo = '';
+
+      switch (tipo) {
+        case 'minimo': multiplicador = 3; titulo = 'KMmínimo'; break;
+        case 'medio': multiplicador = 3.5; titulo = 'KMmédio'; break;
+        case 'ideal': multiplicador = 4; titulo = 'KMideal'; break;
+      }
+
+      const valorFinal = valorKmBase * multiplicador;
+      document.getElementById('popupTitulo').innerText = titulo;
+      document.getElementById('popupTexto').innerText = `R$ ${valorFinal.toFixed(2)}`;
+      document.getElementById('popupOverlay').style.display = 'flex';
+    }
+
+    function fecharPopup() {
+      document.getElementById('popupOverlay').style.display = 'none';
+    }
+
+    function estimarCorrida() {
+      const distancia = parseFloat(document.getElementById('distancia').value);
+      if (isNaN(distancia) || distancia <= 0 || valorKmBase === 0) {
+        alert('Informe uma distância válida e calcule o custo por km antes.');
+        return;
+      }
+
+      const kmMin = (valorKmBase * 3 * distancia).toFixed(2);
+      const kmMed = (valorKmBase * 3.5 * distancia).toFixed(2);
+      const kmIde = (valorKmBase * 4 * distancia).toFixed(2);
+
+      document.getElementById('estimativaResultado').innerText =
+        `KMmínimo: R$ ${kmMin} | KMmédio: R$ ${kmMed} | KMideal: R$ ${kmIde}`;
+    }
+  </script>
+</body>
+</html>
