@@ -151,7 +151,7 @@
       <h3>Cálculo de uma Corrida Particular</h3>
       <label for="distancia">Distância da Corrida (km):</label>
       <input type="number" id="distancia" step="0.1" />
-      <button onclick="estimarCorrida()">Estimar Corrida</button>
+      <button onclick="estimarCorrida()">Calcular Corrida Particular</button>
       <p id="estimativaResultado"></p>
     </div>
   </div>
