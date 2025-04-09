@@ -38,7 +38,7 @@
   <label for="consumo">Consumo do Carro (km por litro):</label>
   <input type="number" id="consumo" step="0.1" required>
 
-  <button onclick="calcular()">Calcular Valor por KM</button>
+  <button onclick="calcular()">Calcular Valor por KM e Indicar a Melhor opção</button>
 
   <div class="resultados" id="resultados" style="display:none;">
     <p><strong>Custo por km:</strong> R$ <span id="valorKm">0.00</span></p>
