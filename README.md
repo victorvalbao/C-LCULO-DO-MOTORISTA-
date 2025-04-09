@@ -11,12 +11,13 @@
       margin: 0;
       padding: 20px;
       color: #333;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       color: #007bff;
       font-size: 26px;
+      margin-bottom: 20px;
     }
 
     .container {
@@ -27,7 +28,6 @@
       border-radius: 12px;
       border: 2px solid #000;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
     }
 
     h2 {
