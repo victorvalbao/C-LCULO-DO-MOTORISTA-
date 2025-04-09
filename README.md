@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -6,90 +6,113 @@
   <title>Melhorando os Ganhos</title>
   <style>
     body {
-      background-color: #f7f7f7;
       font-family: 'Segoe UI', sans-serif;
-      color: #333;
+      background-color: #f5f5f5;
       margin: 0;
       padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+      font-size: 26px;
     }
 
     .container {
-      max-width: 480px;
+      max-width: 500px;
       margin: auto;
-      padding: 20px;
-      border: 3px solid black; /* Aqui está a borda preta */
-      border-radius: 15px;
-      background-color: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      border: 2px solid #000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
 
     h2 {
-      text-align: center;
-      color: #32c766;
-      margin-bottom: 30px;
+      margin-top: 0;
+      color: #2e8b57;
+      font-size: 24px;
+      font-weight: bold;
     }
 
     label {
-      font-size: 14px;
-      margin-bottom: 5px;
+      font-weight: 600;
       display: block;
+      margin-top: 15px;
+      text-align: left;
     }
 
     input {
       width: 100%;
-      padding: 14px;
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background-color: #fff;
+      padding: 12px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
       font-size: 16px;
     }
 
     button {
       width: 100%;
       padding: 14px;
-      margin-bottom: 12px;
+      background-color: #2e8b57;
+      color: white;
       border: none;
       border-radius: 10px;
-      background-color: #32c766;
-      color: #fff;
       font-size: 16px;
-      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      margin-top: 10px;
     }
 
     button:hover {
-      background-color: #28b159;
+      background-color: #256f47;
     }
 
-    .botao-opcao {
-      background-color: #e0e0e0;
-      color: #333;
+    .resultados {
+      margin-top: 20px;
     }
 
-    .botao-opcao:hover {
-      background-color: #ccc;
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
     }
 
-    .secao {
-      margin-bottom: 40px;
-    }
-
-    .resultados, .estimativa {
-      background-color: #fff;
-      padding: 20px;
+    .popup {
+      background-color: white;
+      padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .popup button {
+      margin-top: 15px;
+      padding: 10px 20px;
+    }
+
+    .estimativa {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
     }
 
     .estimativa h3 {
       margin-top: 0;
+      font-size: 18px;
     }
 
     #valorKm {
+      color: #007bff;
       font-weight: bold;
-      color: #007BFF;
     }
 
     #estimativaResultado {
@@ -98,79 +121,41 @@
       font-size: 14px;
       color: #555;
     }
-
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0,0,0,0.4);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .popup {
-      background: #fff;
-      color: #333;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      text-align: center;
-      max-width: 300px;
-      width: 90%;
-    }
-
-    .popup h3 {
-      margin: 0 0 10px;
-      color: #32c766;
-    }
-
-    .popup button {
-      background-color: #32c766;
-      color: white;
-      width: auto;
-      margin-top: 15px;
-      padding: 10px 20px;
-    }
   </style>
 </head>
 <body>
 
+  <h1>CALCULO-DO-MOTORISTA</h1>
+
   <div class="container">
     <h2>Melhorando os Ganhos</h2>
 
-    <div class="secao">
-      <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
-      <input type="number" id="precoCombustivel" step="0.01">
+    <label for="precoCombustivel">Preço do combustível (R$/litro):</label>
+    <input type="number" id="precoCombustivel" step="0.01" />
 
-      <label for="consumo">Consumo do Carro (km/litro):</label>
-      <input type="number" id="consumo" step="0.1">
+    <label for="consumo">Consumo do carro (km/litro):</label>
+    <input type="number" id="consumo" step="0.1" />
 
-      <button onclick="calcular()">Calcular Valor do KM</button>
-    </div>
+    <button onclick="calcular()">Calcular Valor do KM</button>
 
-    <div class="resultados" id="resultados" style="display:none;">
+    <div class="resultados" id="resultados" style="display: none;">
       <p><strong>Custo por km:</strong> <span id="valorKm">R$ 0.00</span></p>
 
-      <h3 style="margin-top: 20px;">Aceitar Corridas</h3>
-      <button class="botao-opcao" onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
-      <button class="botao-opcao" onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
-      <button class="botao-opcao" onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
+      <h3>Aceitar Corridas</h3>
+      <button onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
+      <button onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
+      <button onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
     </div>
 
     <div class="estimativa">
       <h3>Cálculo de uma Corrida Particular</h3>
       <label for="distancia">Distância da Corrida (km):</label>
-      <input type="number" id="distancia" step="0.1">
+      <input type="number" id="distancia" step="0.1" />
       <button onclick="estimarCorrida()">Estimar Corrida</button>
       <p id="estimativaResultado"></p>
     </div>
   </div>
 
-  <!-- Popup -->
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup">
       <h3 id="popupTitulo">Resultado</h3>
@@ -197,7 +182,7 @@
 
     function mostrarResultado(tipo) {
       if (valorKmBase === 0) {
-        alert('Você precisa calcular o valor por KM primeiro.');
+        alert('Calcule primeiro o valor do km.');
         return;
       }
 
@@ -223,7 +208,7 @@
     function estimarCorrida() {
       const distancia = parseFloat(document.getElementById('distancia').value);
       if (isNaN(distancia) || distancia <= 0 || valorKmBase === 0) {
-        alert('Informe uma distância válida e calcule o custo por km antes.');
+        alert('Preencha corretamente os campos e calcule o valor por km.');
         return;
       }
 
@@ -235,5 +220,6 @@
         `KMmínimo: R$ ${kmMin} | KMmédio: R$ ${kmMed} | KMideal: R$ ${kmIde}`;
     }
   </script>
+
 </body>
 </html>
