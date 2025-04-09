@@ -79,6 +79,11 @@
       margin-top: 0;
     }
 
+    #valorKm {
+      font-weight: bold;
+      color: #007BFF;
+    }
+
     #estimativaResultado {
       margin-top: 10px;
       text-align: center;
@@ -148,7 +153,7 @@
   </div>
 
   <div class="estimativa">
-    <h3>Estimar Valor da Corrida (opcional)</h3>
+    <h3>Cálculo de uma Corrida Particular</h3>
     <label for="distancia">Distância da Corrida (km):</label>
     <input type="number" id="distancia" step="0.1">
     <button onclick="estimarCorrida()">Estimar Corrida</button>
@@ -181,44 +186,4 @@
     }
 
     function mostrarResultado(tipo) {
-      if (valorKmBase === 0) {
-        alert('Você precisa calcular o valor por KM primeiro.');
-        return;
-      }
-
-      let multiplicador = 0;
-      let titulo = '';
-
-      switch (tipo) {
-        case 'minimo': multiplicador = 3; titulo = 'KMmínimo'; break;
-        case 'medio': multiplicador = 3.5; titulo = 'KMmédio'; break;
-        case 'ideal': multiplicador = 4; titulo = 'KMideal'; break;
-      }
-
-      const valorFinal = valorKmBase * multiplicador;
-      document.getElementById('popupTitulo').innerText = titulo;
-      document.getElementById('popupTexto').innerText = `R$ ${valorFinal.toFixed(2)}`;
-      document.getElementById('popupOverlay').style.display = 'flex';
-    }
-
-    function fecharPopup() {
-      document.getElementById('popupOverlay').style.display = 'none';
-    }
-
-    function estimarCorrida() {
-      const distancia = parseFloat(document.getElementById('distancia').value);
-      if (isNaN(distancia) || distancia <= 0 || valorKmBase === 0) {
-        alert('Informe uma distância válida e calcule o custo por km antes.');
-        return;
-      }
-
-      const kmMin = (valorKmBase * 3 * distancia).toFixed(2);
-      const kmMed = (valorKmBase * 3.5 * distancia).toFixed(2);
-      const kmIde = (valorKmBase * 4 * distancia).toFixed(2);
-
-      document.getElementById('estimativaResultado').innerText =
-        `KMmínimo: R$ ${kmMin} | KMmédio: R$ ${kmMed} | KMideal: R$ ${kmIde}`;
-    }
-  </script>
-</body>
-</html>
+      if (valorKmBase
