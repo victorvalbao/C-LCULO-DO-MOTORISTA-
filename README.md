@@ -33,10 +33,10 @@
   <h2>Calculadora de Valor por KM</h2>
 
   <label for="precoCombustivel">Preço do Combustível (R$/litro):</label>
-  <input type="number" id="precoCombustivel" step="0.01">
+  <input type="number" id="precoCombustivel" step="0.01" required>
 
   <label for="consumo">Consumo do Carro (km por litro):</label>
-  <input type="number" id="consumo" step="0.1">
+  <input type="number" id="consumo" step="0.1" required>
 
   <button onclick="calcular()">Calcular Valor por KM</button>
 
@@ -63,7 +63,7 @@
     <button onclick="baixarPDF()">Baixar Histórico em PDF</button>
   </div>
 
-  <!-- Biblioteca para gerar PDF -->
+  <!-- Biblioteca PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
@@ -73,17 +73,22 @@
       const preco = parseFloat(document.getElementById('precoCombustivel').value);
       const consumo = parseFloat(document.getElementById('consumo').value);
 
-      if (preco > 0 && consumo > 0) {
+      if (!isNaN(preco) && preco > 0 && !isNaN(consumo) && consumo > 0) {
         valorKmBase = preco / consumo;
         document.getElementById('valorKm').innerText = valorKmBase.toFixed(2);
         document.getElementById('resultados').style.display = 'block';
         document.getElementById('resultadoFinal').innerText = '';
       } else {
-        alert('Preencha todos os campos corretamente.');
+        alert('Preencha os campos corretamente.');
       }
     }
 
     function mostrarResultado(tipo) {
+      if (valorKmBase === 0) {
+        alert('Você precisa calcular o valor por KM primeiro.');
+        return;
+      }
+
       let multiplicador = 0;
       let titulo = '';
 
@@ -99,8 +104,8 @@
 
     function estimarCorrida() {
       const distancia = parseFloat(document.getElementById('distancia').value);
-      if (valorKmBase === 0 || isNaN(distancia) || distancia <= 0) {
-        alert('Informe a distância e calcule o valor por km primeiro.');
+      if (isNaN(distancia) || distancia <= 0 || valorKmBase === 0) {
+        alert('Informe uma distância válida e calcule o custo por km antes.');
         return;
       }
 
@@ -113,7 +118,34 @@
     }
 
     function adicionarAoHistorico() {
+      if (valorKmBase === 0) {
+        alert('Calcule o valor por KM primeiro.');
+        return;
+      }
+
       const preco = document.getElementById('precoCombustivel').value;
       const consumo = document.getElementById('consumo').value;
       const custo = valorKmBase.toFixed(2);
-      const linha =
+      const linha = `Combustível: R$${preco}, Consumo: ${consumo}km/L, Custo/km: R$${custo}\n`;
+      document.getElementById('historicoTexto').value += linha;
+    }
+
+    function baixarPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const texto = document.getElementById('historicoTexto').value || "Sem dados no histórico.";
+      const linhas = texto.split('\n');
+      let y = 10;
+
+      linhas.forEach(linha => {
+        if (linha.trim() !== '') {
+          doc.text(linha, 10, y);
+          y += 10;
+        }
+      });
+
+      doc.save("historico-km.pdf");
+    }
+  </script>
+</body>
+</html>
