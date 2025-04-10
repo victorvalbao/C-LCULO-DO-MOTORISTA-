@@ -133,9 +133,9 @@
       <p><strong>Custo por km:</strong> <span id="valorKm">R$ 0.00</span></p>
 
       <h3>Aceitar Corridas</h3>
-      <button onclick="mostrarResultado('minimo')">1. KMmínimo (x3)</button>
-      <button onclick="mostrarResultado('medio')">2. KMmédio (x3,5)</button>
-      <button onclick="mostrarResultado('ideal')">3. KMideal (x4)</button>
+      <button onclick="mostrarResultado('minimo')">1. KMmínimo </button>
+      <button onclick="mostrarResultado('medio')">2. KMmédio </button>
+      <button onclick="mostrarResultado('ideal')">3. KMideal </button>
     </div>
 
     <div class="estimativa">
