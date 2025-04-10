@@ -120,8 +120,7 @@
 <body>
 
   <div class="container">
-    <h2>CALCULO-DO-MOTORISTA</h2>
-
+    
     <label for="precoCombustivel">Preço do combustível (R$/litro):</label>
     <input type="number" id="precoCombustivel" step="0.01" />
 
